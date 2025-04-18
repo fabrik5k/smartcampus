@@ -1,0 +1,38 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f2f5;
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+header {
+    background-color: #1e90ff;
+    color: white;
+    padding: 20px 0;
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    margin: 20px;
+}
+
+.sensor {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    margin: 10px;
+    padding: 20px;
+    width: 200px;
+}
+
+.sensor h2 {
+    margin-bottom: 10px;
+}
+
+.sensor p {
+    font-size: 24px;
+    font-weight: bold;
+}
