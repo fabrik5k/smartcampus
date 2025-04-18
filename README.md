@@ -1,6 +1,6 @@
 # Projeto SmartCampus - Plataforma Distribuída de Monitoramento
 
-Este projeto simula uma plataforma de **monitoramento e controle inteligente de ambientes**, utilizando uma arquitetura distribuída com comunicação via **Sockets**, **Apache Kafka** e microsserviços em **Python**.
+Este projeto simula uma plataforma de **monitoramento e controle inteligente de ambientes**, utilizando uma arquitetura distribuída com comunicação via **Sockets**, **Apache Kafka** e microsserviços em **Python** e com deploy feito na **AWS**
 
 ## 📦 Estrutura do Projeto
 
