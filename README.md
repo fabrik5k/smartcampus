@@ -73,4 +73,7 @@ Este sistema é uma **simulação acadêmica** e pode ser adaptado para cenário
 
 ---
 
-> Gerado automaticamente em 18/04/2025 18:51:06
+Estudante: João Renan S. Lopes
+Professor: Fábio Araújo
+Disciplina: Programação Paralela e Distribuída
+Instituição: Centro Universitário do Pará
