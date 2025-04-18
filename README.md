@@ -73,7 +73,7 @@ Este sistema é uma **simulação acadêmica** e pode ser adaptado para cenário
 
 ---
 
-Estudante: João Renan S. Lopes
-Professor: Fábio Araújo
-Disciplina: Programação Paralela e Distribuída
-Instituição: Centro Universitário do Pará
+Estudante: João Renan S. Lopes  
+Professor: Fábio Araújo  
+Disciplina: Programação Paralela e Distribuída  
+Instituição: Centro Universitário do Pará  
