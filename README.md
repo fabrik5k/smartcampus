@@ -50,7 +50,7 @@ pip install -r requirements.txt
 
 ### 4. Acessar o painel
 
-No navegador, abra: `http://<IP-DA-EC2>:5000`
+No navegador, abra: `http://http://44.203.161.252:5012`
 
 ## 📡 Comunicação Entre Componentes
 
