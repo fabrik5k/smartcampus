@@ -23,7 +23,3 @@ RUN poetry config virtualenvs.create false && \
 
 # Copia o restante do código da aplicação
 COPY . .
-
-# Define o comando padrão do container
-CMD ["python", "./middleware/consumidor.py"]
-
