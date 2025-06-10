@@ -83,9 +83,9 @@ services:
       FLASK_APP: painel.app
       FLASK_ENV: development
       FLASK_RUN_HOST: 0.0.0.0
-      FLASK_RUN_PORT: 5003
+      FLASK_RUN_PORT: 80
     ports:
-      - '5003:5003'
+      - '80:80'
     depends_on:
       - gateway
     container_name: api_watch

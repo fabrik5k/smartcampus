@@ -62,24 +62,49 @@ resource "aws_instance" "app" {
   vpc_security_group_ids = [aws_security_group.app_sg.id]
 
   # Script que configura Docker, Clone do repo e `docker-compose up -d`
-  user_data = <<-EOF
-              #!/bin/bash
-              yum update -y
-              amazon-linux-extras install docker -y
-              service docker start
-              usermod -a -G docker ec2-user
+   user_data = <<-EOF
+      #!/bin/bash
+      set -e
+      
+      REPO_URL="https://github.com/fabrik5k/smartcampus.git"
+      
+      # 1) Atualiza o SO e instala Docker, Git e dependências
+      sudo yum update -y
+      sudo amazon-linux-extras install docker -y
+      sudo yum install git -y
+      # Se precisar de PolicyKit:
+      # sudo yum install -y polkit
+      
+      # 2) Inicia e habilita o Docker
+      sudo service docker start
+      sudo systemctl enable docker
+      
+      # 3) Adiciona ec2-user ao grupo 'docker'
+      sudo usermod -aG docker ec2-user
+      
+      # 4) Recarrega grupos do shell atual (para não ter que relogar)
+      newgrp docker << EOS
+        echo "Grupo 'docker' ativado no shell."
+      EOS
+      
+      # 5) Instala Docker Compose v2
+      sudo curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
+           -o /usr/local/bin/docker-compose
+      sudo chmod +x /usr/local/bin/docker-compose
+      
+      # 6) Clona o repositório como ec2-user
+      sudo -u ec2-user git clone "$REPO_URL" /home/ec2-user/app
+      
+      sleep 5
 
-              # instala Docker Compose v2
-              curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" \
-                   -o /usr/local/bin/docker-compose
-              chmod +x /usr/local/bin/docker-compose
-
-              # clona seu projeto e sobe containers
-              cd /home/ec2-user
-              git clone ${var.git_repo_url} app
-              cd app
-              docker-compose up -d
-              EOF
+      # 7) Sobe os containers
+      cd /home/ec2-user/app
+      docker-compose up -d
+      
+      echo "Setup concluído!
+      • Se você fechar e reabrir a sessão SSH, o grupo 'docker' já estará ativo.
+      • Acesse via: ssh -i sua-chave.pem ec2-user@IP_DA_INSTÂNCIA"
+        EOF
 
   tags = {
     Name = "terraform-docker-app"
