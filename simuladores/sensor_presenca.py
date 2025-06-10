@@ -3,7 +3,8 @@ import time
 import random
 
 def sensor_presenca():
-    host = 'localhost'
+    # host = 'localhost'
+    host = 'gateway'
     port = 5002
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))

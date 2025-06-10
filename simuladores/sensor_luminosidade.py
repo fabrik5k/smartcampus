@@ -3,7 +3,9 @@ import time
 import random
 
 def sensor_luminosidade():
-    host = 'localhost'
+    # host = 'localhost'
+    # host = 'gateway'
+    host = '172.27.0.4'
     port = 5001
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))

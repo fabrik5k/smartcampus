@@ -3,7 +3,9 @@ import time
 import random
 
 def sensor_temperatura():
-    host = 'localhost'
+    #host = '172.27.0.4'
+    #host = 'localhost'
+    host = 'gateway'
     port = 5000
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
         s.connect((host, port))

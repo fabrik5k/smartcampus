@@ -12,7 +12,7 @@ def lidar_com_conexao(conexao, endereco):
     conexao.close()
 
 def iniciar_servidor(porta):
-    host = 'localhost'
+    host = '0.0.0.0'
     with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as servidor:
         servidor.bind((host, porta))
         servidor.listen()

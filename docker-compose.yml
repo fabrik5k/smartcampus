@@ -16,5 +16,63 @@ services:
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://kafka:9092
+      # KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
+
+  gateway:
+    image: python:3.11-slim 
+    ports:
+      - "5000:5000"
+      - "5001:5001"
+      - "5002:5002"
+    depends_on:
+      - kafka
+    container_name: gateway
+    command: python gateway/gateway.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    restart: unless-stopped
+
+  consumidor:
+    depends_on:
+      - gateway
+    build: .
+    container_name: consumidor
+    command: python middleware/consumidor.py
+    restart: unless-stopped
+
+  sensor_luminosidade:
+    image: python:3.11-slim 
+    depends_on:
+      - gateway
+    container_name: sensor_luminosidade
+    command: python simuladores/sensor_luminosidade.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    restart: unless-stopped
+
+  sensor_presenca:
+    image: python:3.11-slim 
+    depends_on:
+      - gateway
+    container_name: sensor_presenca
+    command: python simuladores/sensor_presenca.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    restart: unless-stopped
+
+  sensor_temperatura:
+    image: python:3.11-slim
+    depends_on:
+      - gateway
+    container_name: sensor_temperatura
+    command: python simuladores/sensor_temperatura.py
+    volumes:
+      - .:/app
+    working_dir: /app
+    restart: unless-stopped
