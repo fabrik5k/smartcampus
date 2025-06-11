@@ -13,18 +13,11 @@ variable "instance_type" {
 variable "key_name" {
   description = "Nome do Key Pair já cadastrado ou a criar"
   type        = string
-  default = fabio-key
+  default = "fabio-keyy"
 }
 
 variable "public_key_path" {
   description = "Caminho local para a sua chave pública (ex: ~/.ssh/id_rsa.pub)"
   type        = string
-  default = "/home/fabio_oliveira/.ssh/keys/public/fabio-key.pub"
+  default = "/home/fabio_oliveira/.ssh/keys/public/fabio-keyy.pub"
 }
-
-variable "git_repo_url" {
-  description = "URL do repositório Git com seu projeto"
-  type        = string
-  
-}
-
